@@ -43,7 +43,7 @@ class MainContainer extends Component {
         return (
             <Fragment>
                 <div>
-                    <h2 style={{margin: "5px"}}>Contacts</h2>
+                    <h2 style={{margin: "10px 0", textAlign: 'center', fontWeight: "bold"}}>Contacts</h2>
                 </div>
                 <div className="Contacts">
                     {contacts}

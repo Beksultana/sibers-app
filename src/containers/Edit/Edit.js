@@ -4,53 +4,60 @@ import {Button, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
 class Edit extends Component {
     render() {
         return <Fragment>
+            <h2 style={{margin: "20px 0", textAlign: 'center', fontWeight: "bold"}}>Edit</h2>
             <Form>
                 <Row form>
                     <Col md={6}>
                         <FormGroup>
-                            <Label for="exampleEmail">Email</Label>
-                            <Input type="email" name="email" id="exampleEmail" placeholder="with a placeholder"/>
+                            <Label for="Name">Name</Label>
+                            <Input type="text" name="email" id="Name" placeholder="Enter a name"/>
                         </FormGroup>
                     </Col>
                     <Col md={6}>
                         <FormGroup>
-                            <Label for="examplePassword">Password</Label>
-                            <Input type="password" name="password" id="examplePassword"
-                                   placeholder="password placeholder"/>
+                            <Label for="userName">User name</Label>
+                            <Input type="text" name="userName" id="userName"
+                                   placeholder="Enter a user name"/>
                         </FormGroup>
                     </Col>
                     <Col md={6}>
                     <FormGroup>
-                        <Label for="examplePassword">Password</Label>
-                        <Input type="password" name="password" id="examplePassword"
-                               placeholder="password placeholder"/>
+                        <Label for="email">Email</Label>
+                        <Input type="email" name="email" id="email"
+                               placeholder="Enter a email"/>
                     </FormGroup>
                 </Col>
                     <Col md={6}>
                     <FormGroup>
-                        <Label for="examplePassword">Password</Label>
-                        <Input type="password" name="password" id="examplePassword"
-                               placeholder="password placeholder"/>
+                        <Label for="phone">Phone</Label>
+                        <Input type="number" name="phone" id="phone"
+                               placeholder="Enter a number"/>
                     </FormGroup>
                 </Col>
                 </Row>
                 <Row form>
                     <Col md={6}>
                         <FormGroup>
-                            <Label for="exampleCity">City</Label>
-                            <Input type="text" name="city" id="exampleCity"/>
+                            <Label for="country">Country</Label>
+                            <Input type="text" name="country" id="country"/>
                         </FormGroup>
                     </Col>
-                    <Col md={4}>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Label for="city">City</Label>
+                            <Input type="text" name="city" id="city"/>
+                        </FormGroup>
+                    </Col>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Label for="state">State</Label>
+                            <Input type="text" name="state" id="state"/>
+                        </FormGroup>
+                    </Col>
+                    <Col md={6}>
                         <FormGroup>
                             <Label for="exampleState">State</Label>
                             <Input type="text" name="state" id="exampleState"/>
-                        </FormGroup>
-                    </Col>
-                    <Col md={2}>
-                        <FormGroup>
-                            <Label for="exampleZip">Zip</Label>
-                            <Input type="text" name="zip" id="exampleZip"/>
                         </FormGroup>
                     </Col>
                 </Row>
