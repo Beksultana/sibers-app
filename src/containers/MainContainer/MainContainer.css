@@ -1,0 +1,65 @@
+.ContactItemBlock {
+    cursor: pointer;
+    width: 260px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin: 5px;
+    box-shadow: 2px 2px 8px #ccc;
+}
+@media screen and (max-width: 770px) {
+    .ContactItemBlock{
+        width: 96%;
+        text-align: center;
+    }
+}
+
+.ContactItemBlock:hover {
+    background: linear-gradient(90deg, #880e4f  0, #f50057 100%);
+    color: #fff;
+}
+.ContactItemBlock:active{
+    opacity: 0.5;
+}
+.ContactItemBlockInfo {
+    padding: 10px 0 0 0;
+}
+.ContactItemBlockInfo h5 {
+    margin: 0;
+}
+.Contacts {
+    display: flex;
+    flex-wrap: wrap;
+    height: 80vh;
+    overflow: scroll;
+}
+.modalBody {
+    display: flex;
+    justify-content: space-between;
+}
+.Contact-avatar{
+    width: 220px;
+    height: 220px;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 770px) {
+    .Contacts{
+        display: block;
+    }
+    .modalBody {
+        display: block;
+    }
+    .Contact-avatar {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+.modal-header {
+    background: #eee;
+}.modal-footer{
+     background: #eee;
+ }
+.info p{
+    margin: 0;
+}
