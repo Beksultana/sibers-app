@@ -1,37 +1,101 @@
 import React, {Component, Fragment} from 'react';
 import {Button, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
+import {connect} from "react-redux";
+import './Edit.css';
+import {saveContact} from "../../store/actions/contactSyncActions";
 
 class Edit extends Component {
+
+    state = {
+        contact: {
+            name: '',
+            username: '',
+            email: '',
+            phone: '',
+            website: '',
+            country: '',
+            city: '',
+            state: '',
+            image: ''
+        },
+        id: null
+    };
+
+    componentDidMount() {
+        const id = this.props.match.params.id;
+        this.fetchIDcon(id)
+    }
+
+    saveItemHandler = (event) => {
+        event.preventDefault();
+        const contacts = this.props.contacts;
+        contacts[this.state.id] = this.state.contact;
+        this.props.saveContact(contacts);
+        this.props.history.push('/');
+    };
+
+    onChangeHandler = (event) => {
+        const contact = {...this.state.contact};
+        contact[event.target.name] = [event.target.value];
+        this.setState({contact})
+    };
+
+    fetchIDcon = id => {
+        const contactItem = this.props.contacts.filter(item => item.id === parseInt(id))[0];
+            this.setState({
+                contact: {
+                    name: contactItem.name,
+                    username: contactItem.username,
+                    email: contactItem.email,
+                    phone: contactItem.phone,
+                    website: contactItem.website,
+                    country: contactItem.address.country,
+                    city: contactItem.address.city,
+                    state: contactItem.address.state,
+                    image: contactItem.avatar
+                },
+              id: id
+            });
+    };
+
+
+
     render() {
+
         return <Fragment>
             <h2 style={{margin: "20px 0", textAlign: 'center', fontWeight: "bold"}}>Edit</h2>
+            <div>
+                <img style={{width: "150px", height: "150px", margin: '10px'}} src={this.state.contact.image} alt=""/>
+            </div>
             <Form>
                 <Row form>
                     <Col md={6}>
                         <FormGroup>
                             <Label for="Name">Name</Label>
-                            <Input type="text" name="email" id="Name" placeholder="Enter a name"/>
+                            <Input value={this.state.contact.name} onChange={this.onChangeHandler}
+                                   type="text" name="name" id="Name" />
                         </FormGroup>
                     </Col>
                     <Col md={6}>
                         <FormGroup>
                             <Label for="userName">User name</Label>
-                            <Input type="text" name="userName" id="userName"
-                                   placeholder="Enter a user name"/>
+                            <Input value={this.state.contact.username}  onChange={this.onChangeHandler}
+                                type="text" name="username" id="userName" />
                         </FormGroup>
                     </Col>
                     <Col md={6}>
                     <FormGroup>
                         <Label for="email">Email</Label>
-                        <Input type="email" name="email" id="email"
-                               placeholder="Enter a email"/>
+                        <Input value={this.state.contact.email} onChange={this.onChangeHandler}
+                               type="email" name="email" id="email"/>
                     </FormGroup>
                 </Col>
                     <Col md={6}>
                     <FormGroup>
                         <Label for="phone">Phone</Label>
-                        <Input type="number" name="phone" id="phone"
-                               placeholder="Enter a number"/>
+                        <Input
+                            value={this.state.contact.phone} onChange={this.onChangeHandler}
+                            type="text" name="phone" id="phone" />
                     </FormGroup>
                 </Col>
                 </Row>
@@ -39,32 +103,48 @@ class Edit extends Component {
                     <Col md={6}>
                         <FormGroup>
                             <Label for="country">Country</Label>
-                            <Input type="text" name="country" id="country"/>
+                            <Input value={this.state.contact.country} onChange={this.onChangeHandler}
+                                   type="text" name="country" id="country"/>
                         </FormGroup>
                     </Col>
                     <Col md={6}>
                         <FormGroup>
                             <Label for="city">City</Label>
-                            <Input type="text" name="city" id="city"/>
+                            <Input value={this.state.contact.city} onChange={this.onChangeHandler}
+                                   type="text" name="city" id="city"/>
                         </FormGroup>
                     </Col>
                     <Col md={6}>
                         <FormGroup>
                             <Label for="state">State</Label>
-                            <Input type="text" name="state" id="state"/>
+                            <Input value={this.state.contact.state} onChange={this.onChangeHandler}
+                                   type="text" name="state" id="state"/>
                         </FormGroup>
                     </Col>
                     <Col md={6}>
                         <FormGroup>
-                            <Label for="exampleState">State</Label>
-                            <Input type="text" name="state" id="exampleState"/>
+                            <Label for="website">Web Site</Label>
+                            <Input value={this.state.contact.website} onChange={this.onChangeHandler}
+                                   type="text" name="website" id="website"/>
                         </FormGroup>
                     </Col>
                 </Row>
-                <Button>Sign in</Button>
+                <Button className="EditBtn" onClick={this.saveItemHandler}>Save</Button>
             </Form>
         </Fragment>;
     }
 }
 
-export default Edit;
+const mapStateToProps = state => {
+    return {
+        contacts: state.contactReducer.contacts
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        saveContact: (contacts) => dispatch(saveContact(contacts))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Edit);

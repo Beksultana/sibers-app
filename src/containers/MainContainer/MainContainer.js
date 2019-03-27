@@ -22,24 +22,28 @@ class MainContainer extends Component {
         this.setState({selectedContact: null});
     };
 
-    EditHandler = (id, event) => {
+    EditHandler = (id ,event) => {
         event.preventDefault();
-        this.props.history.push(`/edit/:${id}`)
+        this.props.history.push(`/edit/${id}`)
     };
 
     render() {
-        const contacts = this.props.contacts.map((contact) => {
+        const contacts = this.props.contacts ? this.props.contacts.map((contact) => {
             return (
                 <div onClick={() => this.showModal(contact)} key={contact.id}>
                     <Card className=" ContactItemBlock">
                         <CardBody className="ContactItemBlockInfo">
-                            <CardTitle>{contact.name}</CardTitle>
-                            <CardTitle>{contact.username}</CardTitle>
+                            <div><img src={contact.avatar} alt=""/></div>
+                            <div>
+                                <CardTitle>{contact.name}</CardTitle>
+                                <CardTitle>{contact.username}</CardTitle>
+                            </div>
                         </CardBody>
                     </Card>
                 </div>
             )
-        });
+        }): null;
+
         return (
             <Fragment>
                 <div>
@@ -76,7 +80,9 @@ class MainContainer extends Component {
                                 </div>
                             </ModalBody>
                             <ModalFooter>
-                                <Button color="primary" onClick={this.EditHandler.bind(this, this.state.selectedContact.id)}>Edit</Button>{' '}
+                                <Button color="primary"
+                                        onClick={this.EditHandler.bind(this, this.state.selectedContact.id)}
+                                >Edit</Button>{' '}
                                 <Button color="danger" onClick={this.hideModal}>Cancel</Button>
                             </ModalFooter>
                         </Fragment>
