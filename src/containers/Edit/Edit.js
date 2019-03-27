@@ -19,12 +19,12 @@ class Edit extends Component {
             image: ''
         },
         id: null
-    };
+    }; // object where to save changed data
 
     componentDidMount() {
         const id = this.props.match.params.id;
         this.fetchIDcon(id)
-    }
+    } // return id objects
 
     saveItemHandler = (event) => {
         event.preventDefault();
@@ -32,13 +32,13 @@ class Edit extends Component {
         contacts[this.state.id] = this.state.contact;
         this.props.saveContact(contacts);
         this.props.history.push('/');
-    };
+    }; // saving changed data
 
     onChangeHandler = (event) => {
         const contact = {...this.state.contact};
         contact[event.target.name] = [event.target.value];
         this.setState({contact})
-    };
+    }; // so that you can write in input
 
     fetchIDcon = id => {
         const contactItem = this.props.contacts.filter(item => item.id === parseInt(id))[0];
@@ -56,7 +56,7 @@ class Edit extends Component {
                 },
               id: id
             });
-    };
+    }; // I show contact information in input
 
 
 
@@ -139,12 +139,12 @@ const mapStateToProps = state => {
     return {
         contacts: state.contactReducer.contacts
     }
-};
+}; // returning an array of contacts from reducer (map state to props)
 
 const mapDispatchToProps = dispatch => {
     return {
         saveContact: (contacts) => dispatch(saveContact(contacts))
     }
-};
+}; // Map dispatch to props
 
 export default connect(mapStateToProps, mapDispatchToProps)(Edit);

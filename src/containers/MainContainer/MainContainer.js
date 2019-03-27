@@ -12,15 +12,15 @@ class MainContainer extends Component {
 
     componentDidMount() {
         this.props.fetchContacts()
-    }
+    } // a function that returns all the data
 
     showModal = contact => {
         this.setState({selectedContact: contact});
-    };
+    }; // show modal information
 
     hideModal = () => {
         this.setState({selectedContact: null});
-    };
+    }; // hide modal
 
     EditHandler = (id ,event) => {
         event.preventDefault();
@@ -97,12 +97,12 @@ const mapStateToProps = state => {
     return {
         contacts: state.contactReducer.contacts
     }
-};
+}; // returning an array of contacts from reducer (map state to props)
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchContacts: () => dispatch(fetchContact())
     }
-};
+}; // map dispatch to props
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
